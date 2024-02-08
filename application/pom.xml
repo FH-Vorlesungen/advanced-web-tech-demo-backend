@@ -68,6 +68,11 @@
             <artifactId>open-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>lv.webtech</groupId>
+            <artifactId>infrastructure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 <!--        TODO: add if security is needed-->
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->

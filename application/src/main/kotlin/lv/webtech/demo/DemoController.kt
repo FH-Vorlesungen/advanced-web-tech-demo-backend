@@ -1,20 +1,27 @@
 package lv.webtech.demo
 
-import lv.webtech.demo.openapi.api.PetsApi
-import lv.webtech.demo.openapi.model.Pet
+import lv.webtech.demo.openapi.api.PostsApi
+import lv.webtech.demo.openapi.model.Post
+import lv.webtech.demo.repository.PostsRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/pets")
-class DemoController: PetsApi {
+@RequestMapping("/posts")
+class DemoController(val postsRepository: PostsRepository) : PostsApi {
+
+
     @GetMapping
-    override fun listPets(limit: Int?): ResponseEntity<MutableList<Pet>> {
-        val pet = Pet(1,"Fred")
-        val pet2 = Pet(2,"Tom")
-        val pets = mutableListOf(pet, pet2);
-        return ResponseEntity.ok(pets);
+    override fun listPosts(limit: Int?): ResponseEntity<MutableList<Post>> {
+        val posts = postsRepository.findAll().toList().stream().map { x ->
+            val post = Post()
+            post.id(x.id)
+            post.title(x.title)
+            post.message(x.message)
+        }.toList()
+        return ResponseEntity.ok(posts)
     }
+
 }

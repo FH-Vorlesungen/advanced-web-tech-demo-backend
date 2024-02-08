@@ -41,7 +41,13 @@ paths:
       summary: Create a post
       operationId: createPosts
       tags:
-        - pets
+        - posts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePostRequest"
       responses:
         '201':
           description: Null response
@@ -83,11 +89,20 @@ components:
       type: object
       required:
         - id
-        - name
+        - title
       properties:
         id:
           type: string
           format: UUID
+        title:
+          type: string
+        message:
+          type: string
+    CreatePostRequest:
+      type: object
+      required:
+        - title
+      properties:
         title:
           type: string
         message:
